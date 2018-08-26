@@ -12,3 +12,12 @@ export const fetchGames = ()=>{
         .then(data=>dispatch(setGames(data.games)))
     }
 }
+export const saveGame = (data) =>{
+    fetch('/api/games',{
+        method: 'post',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+}

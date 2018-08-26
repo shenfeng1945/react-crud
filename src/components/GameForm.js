@@ -1,14 +1,16 @@
 import React,{Component} from 'react'
 import classnames from 'classnames'
 import {connect} from 'react-redux'
-import {saveGame} from '../actions'
+import {saveGame,fetchGame} from '../actions'
 import { Redirect } from 'react-router'
+
 
 
 class GameForm extends Component {
     state = {
-        title:'',
-        cover:'',
+        _id: this.props.game?this.props.game._id:null,
+        title:this.props.game?this.props.game.title:'',
+        cover:this.props.game?this.props.game.cover:'',
         errors: {},
         loading: false,
         done: false
@@ -21,6 +23,20 @@ class GameForm extends Component {
         }else{
            this.setState({[e.target.name]:e.target.value})
         }
+    }
+    componentDidMount(){
+       const {match} = this.props;
+       if(match.params._id){
+          this.props.fetchGame(match.params._id)
+       }
+    }
+    //数据请求是异步的
+    componentWillReceiveProps(nextProps){
+       this.setState({
+         _id: nextProps.game._id,
+         title: nextProps.game.title,
+         cover: nextProps.game.cover
+       })
     }
     handleSubmit(e){
        e.preventDefault();
@@ -47,7 +63,9 @@ class GameForm extends Component {
     render(){
         const form = (
             <form className={classnames('ui','form',{loading: this.state.loading})} onSubmit={this.handleSubmit.bind(this)}>
-            <h1>Add new game</h1> 
+            <h1>
+               {this.props.match.params._id?'Edit game':'Add new game'}
+            </h1> 
             {!!this.state.errors.global && 
                <div className="ui negative message">{this.state.errors.global}</div>
             }
@@ -83,4 +101,13 @@ class GameForm extends Component {
         )
     }
 }
-export default connect(null,{saveGame})(GameForm)
+const mapStateToProps = (state,props)=>{
+    const {match} = props
+    if(match.params._id){
+      return {
+         game: state.games.find(item=>item._id===match.params._id)
+      }
+    }
+    return {game: null}
+}
+export default connect(mapStateToProps,{saveGame,fetchGame})(GameForm)

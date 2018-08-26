@@ -24,6 +24,11 @@ mongodb.MongoClient.connect(dbUrl,(err,client)=>{
             res.json({games})
         })
     })
+    app.get('/api/game/:_id',(req,res)=>{
+        db.collection('games').findOne({_id: new mongodb.ObjectID(req.params._id)},(err,game)=>{
+            res.json({game})
+        })
+    })
     app.post('/api/games',(req,res)=>{
         const {errors,isValid} = validdata(req.body)
         if(isValid){

@@ -5,6 +5,15 @@ const setGames = (games)=>{
         games
     }
 }
+const handleResponse = (res)=>{
+  if(res.ok){
+      return res.json()
+  }else{
+      let error = new Error(res.statusText)
+      error.response = res
+      throw error;
+  }
+}
 export const fetchGames = ()=>{
     return dispatch=>{
        fetch('/api/games')
@@ -13,11 +22,13 @@ export const fetchGames = ()=>{
     }
 }
 export const saveGame = (data) =>{
-    fetch('/api/games',{
-        method: 'post',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type':'application/json'
-        }
-    })
+    return dispatch =>{
+      return fetch('/api/games',{
+          method: 'post',
+          body: JSON.stringify(data),
+          headers: {
+              'Content-Type':'application/json'
+          }
+       }).then(handleResponse)
+    }
 }

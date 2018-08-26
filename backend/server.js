@@ -11,5 +11,12 @@ mongodb.MongoClient.connect(dbUrl,(err,client)=>{
             res.json({games})
         })
     })
+    app.use((req,res)=>{
+        res.status(404).json({
+            errors: {
+                global: 'Still working on it. Please try again later than when we implement it.'
+            }
+        })
+    })
     app.listen('8080',()=>{console.log('server is running on localhost:8080')})
 })

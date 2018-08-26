@@ -33,13 +33,19 @@ class GameForm extends Component {
        if(!isValid){
           let {title,cover} = this.state
           this.setState({loading:true})
-          this.props.saveGame({title,cover})
+          this.props.saveGame({title,cover}).then(
+              ()=>this.setState({loading:false}),
+              (err)=>err.response.json().then(({errors})=>this.setState({errors,loading:false}))
+          )
        }
     }
     render(){
         return(
             <form className={classnames('ui','form',{loading: this.state.loading})} onSubmit={this.handleSubmit.bind(this)}>
              <h1>Add new game</h1> 
+             {!!this.state.errors.global && 
+                <div className="ui negative message">{this.state.errors.global}</div>
+             }
              <div className={classnames('field',{error: !!this.state.errors.title})}>
                <label htmlFor="title">Title</label>
                <input type="text" name="title" 

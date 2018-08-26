@@ -25,12 +25,12 @@ ReactDOM.render(
             <div className="ui container">
                 <div className="ui three item menu">
                     <NavLink exact activeClassName="active" to="/" className="item">Home</NavLink>
-                    <NavLink exact activeClassName="active" to="/game" className="item">Game</NavLink>
-                    <NavLink activeClassName="active" to="/game/new" className="item">New Game</NavLink>
+                    <NavLink exact activeClassName="active" to="/games" className="item">Game</NavLink>
+                    <NavLink activeClassName="active" to="/games/new" className="item">New Game</NavLink>
                 </div>
                 <Route exact path="/" component={App} />
-                <Route exact path="/game" component={GamesPage} />
-                <Route path="/game/new" component={GameForm} />
+                <Route exact path="/games" component={GamesPage} />
+                <Route path="/games/new" component={GameForm} />
             </div>
         </Router>
     </Provider>,

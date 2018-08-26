@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import classnames from 'classnames'
 import {connect} from 'react-redux'
-import {saveGame,fetchGame} from '../actions'
+import {saveGame,fetchGame,updateGame} from '../actions'
 import { Redirect } from 'react-router'
 
 
@@ -50,14 +50,23 @@ class GameForm extends Component {
        this.setState({errors})
        const isValid = Object.keys(errors).length===0
        if(isValid){
-          let {title,cover} = this.state
+          let {_id,title,cover} = this.state
           this.setState({loading:true})
-          this.props.saveGame({title,cover}).then(
+          if(_id){
+            this.props.updateGame({_id,title,cover}).then(
+                ()=>{
+                   this.setState({done:true})
+                },
+                (err)=>err.response.json().then(({errors})=>this.setState({errors,loading:false}))
+              )
+          }else{
+            this.props.saveGame({title,cover}).then(
               ()=>{
                  this.setState({done:true})
               },
               (err)=>err.response.json().then(({errors})=>this.setState({errors,loading:false}))
-          )
+            )
+          }
        }
     }
     render(){
@@ -110,4 +119,4 @@ const mapStateToProps = (state,props)=>{
     }
     return {game: null}
 }
-export default connect(mapStateToProps,{saveGame,fetchGame})(GameForm)
+export default connect(mapStateToProps,{saveGame,fetchGame,updateGame})(GameForm)

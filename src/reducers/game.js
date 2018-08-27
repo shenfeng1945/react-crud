@@ -1,4 +1,4 @@
-import {SET_GAMES,ADD_GAME,GAME_FETCH,UPDATE_GAME} from '../constants'
+import {SET_GAMES,ADD_GAME,GAME_FETCH,UPDATE_GAME,GAME_DELETED} from '../constants'
 export default (state = [], action={}) => {
   switch (action.type) {
   case SET_GAMES:
@@ -8,6 +8,8 @@ export default (state = [], action={}) => {
       ...state,
       action.game
     ]
+  case GAME_DELETED: 
+   return state.filter(item=>item._id!==action.gameId)
   case GAME_FETCH:
     const index = state.findIndex(item=>item._id === action.game._id)
     if(index>-1){

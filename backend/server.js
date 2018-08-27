@@ -29,6 +29,14 @@ mongodb.MongoClient.connect(dbUrl,(err,client)=>{
             res.json({game})
         })
     })
+    app.delete('/api/games/:_id',(req,res)=>{
+        db.collection('games').deleteOne({_id: new mongodb.ObjectID(req.params._id)},(err,game)=>{
+            if(err){
+                res.status(500).json({errors: {global: err}})
+                return
+              }else{res.json({})}
+        })
+    })
     app.put('/api/games/:_id',(req,res)=>{
         const {errors,isValid} = validdata(req.body)
         if(isValid){

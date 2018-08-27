@@ -1,8 +1,6 @@
 import React,{Component} from 'react'
 import classnames from 'classnames'
-import {connect} from 'react-redux'
-import {saveGame,fetchGame,updateGame} from '../actions'
-import { Redirect } from 'react-router'
+
 
 
 
@@ -13,7 +11,6 @@ class GameForm extends Component {
         cover:this.props.game?this.props.game.cover:'',
         errors: {},
         loading: false,
-        done: false
     }
     handleChange(e){
         if(this.state.errors[e.target.name]){
@@ -24,12 +21,7 @@ class GameForm extends Component {
            this.setState({[e.target.name]:e.target.value})
         }
     }
-    componentDidMount(){
-       const {match} = this.props;
-       if(match.params._id){
-          this.props.fetchGame(match.params._id)
-       }
-    }
+    
     //数据请求是异步的
     componentWillReceiveProps(nextProps){
        this.setState({
@@ -52,21 +44,10 @@ class GameForm extends Component {
        if(isValid){
           let {_id,title,cover} = this.state
           this.setState({loading:true})
-          if(_id){
-            this.props.updateGame({_id,title,cover}).then(
-                ()=>{
-                   this.setState({done:true})
-                },
+          this.props.saveGame({_id,title,cover})
+              .catch(
                 (err)=>err.response.json().then(({errors})=>this.setState({errors,loading:false}))
               )
-          }else{
-            this.props.saveGame({title,cover}).then(
-              ()=>{
-                 this.setState({done:true})
-              },
-              (err)=>err.response.json().then(({errors})=>this.setState({errors,loading:false}))
-            )
-          }
        }
     }
     render(){
@@ -105,18 +86,9 @@ class GameForm extends Component {
         )
         return(
           <div>
-              {this.state.done?<Redirect to='/games' />:form}
+             {form}
           </div>
         )
     }
 }
-const mapStateToProps = (state,props)=>{
-    const {match} = props
-    if(match.params._id){
-      return {
-         game: state.games.find(item=>item._id===match.params._id)
-      }
-    }
-    return {game: null}
-}
-export default connect(mapStateToProps,{saveGame,fetchGame,updateGame})(GameForm)
+export default GameForm

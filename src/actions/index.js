@@ -6,7 +6,6 @@ const setGames = (games)=>{
     }
 }
 const handleResponse = (res)=>{
-   console.log(res)
   if(res.ok){
       return res.json()
   }else{

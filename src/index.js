@@ -24,14 +24,14 @@ ReactDOM.render(
         <Router>
             <div className="ui container">
                 <div className="ui three item menu">
-                    <NavLink exact activeClassName="active" to={`/`} className="item">Home</NavLink>
-                    <NavLink exact activeClassName="active" to={`/games`} className="item">Game</NavLink>
-                    <NavLink activeClassName="active" to={`/games/new`} className="item">New Game</NavLink>
+                    <NavLink exact activeClassName="active" to={`/react-crud/build/`} className="item">Home</NavLink>
+                    <NavLink exact activeClassName="active" to={`/react-crud/build/games`} className="item">Game</NavLink>
+                    <NavLink activeClassName="active" to={`/react-crud/build/games/new`} className="item">New Game</NavLink>
                 </div>
-                <Route exact path={`/`} component={App} />
-                <Route exact path={`/games`} component={GamesPage} />
-                <Route path={`/games/new`} component={GameFormPage} />
-                <Route path={`/game/:_id`} component={GameFormPage} />
+                <Route exact path={`/react-crud/build/`} component={App} />
+                <Route exact path={`/react-crud/build/games`} component={GamesPage} />
+                <Route path={`/react-crud/build/games/new`} component={GameFormPage} />
+                <Route path={`/react-crud/build/game/:_id`} component={GameFormPage} />
             </div>
         </Router>
     </Provider>,

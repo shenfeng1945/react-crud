@@ -70,7 +70,7 @@ module.exports = function(app) {
         res.status(404).json({
             errors: {
                 global: 'Still working on it. Please try again later than when we implement it.'
-            g
+            }
         })
     })
   }

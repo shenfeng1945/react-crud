@@ -31,7 +31,7 @@ class GameFormPage extends Component {
           <div>
               {
                   this.state.redirect?
-                  <Redirect to="`${url}/games`"/>:
+                  <Redirect to={`${url}/games`}/>:
                   <GameForm saveGame={this.saveGame}
                    game={this.props.game}
                    match={this.props.match}

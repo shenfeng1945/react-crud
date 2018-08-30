@@ -1,4 +1,5 @@
 import {SET_GAMES,ADD_GAME,GAME_FETCH,UPDATE_GAME,GAME_DELETED,} from '../constants'
+const url = 'http://shenfeng1945.top/react-crud'
 const setGames = (games)=>{
     return {
         type: SET_GAMES,
@@ -16,13 +17,12 @@ const handleResponse = (res)=>{
 }
 export const fetchGames = ()=>{
     return dispatch=>{
-       fetch('/api/games')
+       fetch(`${url}/api/games`)
         .then(res=>res.json())
         .then(data=>dispatch(setGames(data.games)))
     }
 }
 const addGame = (game) =>{
-    console.log('game',game)
    return {
        type: ADD_GAME,
        game,
@@ -36,7 +36,7 @@ const gameFetched = (game)=>{
 }
 export const saveGame = (data) =>{
     return dispatch =>{
-      return fetch('/api/games',{
+      return fetch(`${url}/api/games`,{
           method: 'post',
           body: JSON.stringify(data),
           headers: {
@@ -49,7 +49,7 @@ export const saveGame = (data) =>{
 }
 export const fetchGame = (id) =>{
   return dispatch =>{
-      return fetch(`/api/game/${id}`)
+      return fetch(`${url}/api/game/${id}`)
              .then(res=>res.json())
              .then(data=>dispatch(gameFetched(data.game)))
   }
@@ -62,7 +62,7 @@ const gameUpdate = (game)=>{
 }
 export const updateGame = (data)=>{
    return dispatch =>{
-       return fetch(`/api/games/${data._id}`,{
+       return fetch(`${url}/api/games/${data._id}`,{
         method: 'put',
         body: JSON.stringify(data),
         headers: {
@@ -81,7 +81,7 @@ const gameDeleted = (gameId) =>{
 }
 export const deleteGame = (id) =>{
    return dispatch =>{
-    return fetch(`/api/games/${id}`,{
+    return fetch(`${url}/api/games/${id}`,{
         method: 'delete',
         headers: {
             'Content-Type':'application/json'

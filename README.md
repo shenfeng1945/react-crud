@@ -1,10 +1,10 @@
 ### react-crud
-1. 数据库使用mongodb,后台使用express
-2. 如何使用
+1. 数据库使用mlab,配合mongoose和express开发后台
+2. 如何使用: 
 ```
-mac: 
-brew install mongodb;
-brew services start mongodb;
-cd react-crud;yarn install;yarn start;
-cd react-crud/backend;yarn install;yarn start;
+git clone git@github.com:shenfeng1945/react-crud.git;
+git checkout -b dev;
+npm i;npm start;
+cd backend;npm i;npm start;
 ```
+3. 现所有用户共用的同一张表，后续使用登录注册,待完善。

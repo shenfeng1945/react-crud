@@ -22,6 +22,7 @@ export const fetchGames = ()=>{
     }
 }
 const addGame = (game) =>{
+    console.log('game',game)
    return {
        type: ADD_GAME,
        game,
@@ -42,8 +43,9 @@ export const saveGame = (data) =>{
               'Content-Type':'application/json'
           }
        }).then(handleResponse)
-         .then(data=>dispatch(addGame(data.game)))
+         .then(data=>dispatch(addGame(data)))
     }
+    
 }
 export const fetchGame = (id) =>{
   return dispatch =>{
@@ -67,7 +69,7 @@ export const updateGame = (data)=>{
             'Content-Type':'application/json'
         }
        }).then(handleResponse)
-         .then(data=>dispatch(gameUpdate(data.game)))
+         .then(data=>dispatch(gameUpdate(data)))
              
    }
 }

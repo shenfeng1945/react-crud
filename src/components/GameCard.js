@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
+import {url} from '../constants'
 const GameCard = ({game,deleteGame})=>{
     return (
         <div className="ui card">
@@ -12,7 +13,7 @@ const GameCard = ({game,deleteGame})=>{
           </div>
           <div className="extra content">
            <div className="ui two buttons">
-              <Link to={`/game/${game._id}`} className="ui basic button green">Edit</Link> 
+              <Link to={`${url}/game/${game._id}`} className="ui basic button green">Edit</Link> 
               <div className="ui basic button red" onClick={()=>deleteGame(game._id)}>Delete</div> 
            </div> 
           </div>

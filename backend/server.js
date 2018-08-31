@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import crudController from './controllers/CrudController'
+import cors from 'cors'
 //const fs = require('fs')
 //const https = require('https')
 
@@ -13,6 +14,7 @@ import crudController from './controllers/CrudController'
 
 var app = express()
 app.use(bodyParser.json())
+app.use(cors())
 crudController(app)
 //https.createServer(options,app).listen(4000)
 app.listen(4000)

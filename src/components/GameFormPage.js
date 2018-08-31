@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {saveGame,fetchGame,updateGame} from '../actions'
 import { Redirect } from 'react-router'
 import GameForm from './GameForm'
-import {url} from '../constants'
+import {url} from '../constants/'
 
 class GameFormPage extends Component {
    state = {
@@ -31,7 +31,7 @@ class GameFormPage extends Component {
           <div>
               {
                   this.state.redirect?
-                  <Redirect to={`/react-crud/build/games`}/>:
+                  <Redirect to={`${url}/games`}/>:
                   <GameForm saveGame={this.saveGame}
                    game={this.props.game}
                    match={this.props.match}

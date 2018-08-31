@@ -6,7 +6,6 @@ var todoSchema = new mongoose.Schema({
    cover: String
 });
 var Crud = mongoose.model('crud', todoSchema);
-const url='http://shenfeng1945.top/react-top'
 const validdata = (data) =>{
     let errors = {}
     if(data.title === ''){
@@ -20,19 +19,19 @@ const validdata = (data) =>{
 }
 
 module.exports = function(app) {
-    app.get(url+'/api/games', (req, res)=>{
+    app.get('/api/games', (req, res)=>{
        Crud.find({},(err,games)=>{
           res.json({games})
        })
     });
   
-    app.get(url+'/api/game/:id', (req, res)=>{
+    app.get('/api/game/:id', (req, res)=>{
        Crud.findById({_id:req.params.id},(err,game)=>{
            res.json({game})
        }) 
     });
   
-    app.delete(url+'/api/games/:id', (req, res)=>{
+    app.delete('/api/games/:id', (req, res)=>{
         Crud.find({_id:req.params.id}).remove((err,_)=>{
             if(err){
                 res.status(500).json({errors:{global:err}});
@@ -42,7 +41,7 @@ module.exports = function(app) {
             }
         })
     });
-    app.put(url+'/api/games/:id',(req,res)=>{
+    app.put('/api/games/:id',(req,res)=>{
         const {errors,isValid} = validdata(req.body)
         if(isValid){
             const {title,cover} = req.body
@@ -60,7 +59,7 @@ module.exports = function(app) {
             })
         }
     })
-    app.post(url+'/api/games',(req,res)=>{
+    app.post('/api/games',(req,res)=>{
         Crud(req.body).save((err,data)=>{
             if(err) throw err;
             res.json(data)

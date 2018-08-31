@@ -11,7 +11,6 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import {url} from './constants/'
 
 const store = createStore(
     rootReducer,
@@ -25,13 +24,13 @@ ReactDOM.render(
         <Router>
             <div className="ui container">
                 <div className="ui three item menu">
-                    <NavLink exact activeClassName="active" to={`${url}/`} className="item">Home</NavLink>
-                    <NavLink exact activeClassName="active" to={`${url}/games`} className="item">Game</NavLink>
-                    <NavLink activeClassName="active" to={`${url}/games/new`} className="item">New Game</NavLink>
+                    <NavLink exact activeClassName="active" to={`/`} className="item">Home</NavLink>
+                    <NavLink exact activeClassName="active" to={`/games`} className="item">Game</NavLink>
+                    <NavLink activeClassName="active" to={`/games/new`} className="item">New Game</NavLink>
                 </div>
-                <Route exact path={`${url}/`} component={App} />
-                <Route exact path={`${url}/games`} component={GamesPage} />
-                <Route path={`${url}/games/new`} component={GameFormPage} />
+                <Route exact path={`/`} component={App} />
+                <Route exact path={`/games`} component={GamesPage} />
+                <Route path={`/games/new`} component={GameFormPage} />
                 <Route path={`/game/:_id`} component={GameFormPage} />
             </div>
         </Router>

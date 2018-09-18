@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://shenfeng1945:shenfeng1945@ds249428.mlab.com:49428/crud')
 var todoSchema = new mongoose.Schema({
